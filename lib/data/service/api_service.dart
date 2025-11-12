@@ -13,8 +13,6 @@ class ApiService {
       headers: {
         'accept': 'application/vnd.github+json',
         'content-Type': 'application/json',
-        'Authorization':
-            'toekn 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', // now its hardcoded for testing
       },
     );
 
