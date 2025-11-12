@@ -1,11 +1,11 @@
 # devhub
 
 A Flutter application built with Clean Architecture, GetX for state management, and SharedPreferences for local persistence.
-The app fetches a list of developers, allows users to favorite developers, toggle between light/dark themes, and supports pull-to-refresh functionality.
+The app fetches a list of developers, toggle between light/dark themes, and supports pull-to-refresh functionality.
 
 
 📁 Project Structure
-⚙️ Features<img width="699" height="357" alt="Screenshot 2025-11-12 at 4 04 49 PM" src="https://github.com/user-attachments/assets/4233bbb9-a17c-4c53-9e2d-ac2687bd5885" />
+<img width="699" height="357" alt="Screenshot 2025-11-12 at 4 04 49 PM" src="https://github.com/user-attachments/assets/4233bbb9-a17c-4c53-9e2d-ac2687bd5885" />
 
 
 
@@ -21,7 +21,7 @@ Presentation => 	UI layer that observes GetX states
 
 
 
-
+⚙️ Features
 
 🔄 Pull-to-refresh for developer list
 
