@@ -1,16 +1,54 @@
 # devhub
 
-A new Flutter project.
+A Flutter application built with Clean Architecture, GetX for state management, and SharedPreferences for local persistence.
+The app fetches a list of developers, allows users to favorite developers, toggle between light/dark themes, and supports pull-to-refresh functionality.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+📁 Project Structure
+lib/
+├── application/
+│   ├── controller/          # GetX controllers for business logic
+│   └── presentation/        # UI screens and widgets
+│
+├── data/
+│   ├── service/             # Handles API or local asset JSON fetching
+│   └── shared_pref/         # SharedPreference helper classes
+│
+├── domain/
+│   ├── core/                # App-wide constants, utilities, themes
+│   ├── models/              # Entity and model definitions
+│   └── repository/          # Repository implementations connecting data & domain layers
+│
+└── main.dart                # App entry point
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+🧩 Architecture Overview
+
+This project follows Clean Architecture principles:
+
+Layer	Responsibility
+Domain	=> Business logic, entities, and repository contracts
+Data	=> Handles data sources (local JSON, APIs, SharedPrefs)
+Application =>	Connects data & domain layers; manages controllers (GetX)
+Presentation => 	UI layer that observes GetX states
+
+
+⚙️ Features
+
+🔄 Pull-to-refresh for developer list
+
+🌗 Dark/Light mode toggle using SharedPreferences
+
+🧱 Clean architecture and modular design
+
+🚀 GetX state management
+
+
+
+🧰 Dependencies
+Package	Purpose
+get	State management & navigation
+shared_preferences	Local key-value storage
+dio or rootBundle	Fetching developer data (API or local JSON)
+
