@@ -1,16 +1,33 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'package:dartz/dartz.dart';
+import 'package:devhub/application/presentation/utils/constants.dart';
 import 'package:devhub/data/service/api_service.dart';
 import 'package:devhub/domain/core/api_endpoints/api_endpoints.dart';
 import 'package:devhub/domain/models/failure/failure.dart';
 import 'package:devhub/domain/models/user_details/user_details.dart';
 import 'package:devhub/domain/repository/user_repo.dart';
+import 'package:flutter/services.dart';
 
 class UserService implements UserRepo {
   final ApiService apiService = ApiService();
+
+  /// Toggle this to use mock data instead of live API.
+  final bool useMockData = true;
+
   @override
   Future<Either<Failure, List<UserDetails>>> getDevelopers() async {
     try {
+      if (useMockData) {
+        //  Load local mock data
+        log('[UserService] Using mock data from $jsonPath');
+        final jsonString = await rootBundle.loadString(jsonPath);
+
+        final List<dynamic> data = json.decode(jsonString);
+        final developers = data.map((e) => UserDetails.fromJson(e)).toList();
+        return Right(developers);
+      }
+
       /// Get the base user list
       final result = await apiService.get(ApiEndPoints.users);
       final developers = (result as List<dynamic>)

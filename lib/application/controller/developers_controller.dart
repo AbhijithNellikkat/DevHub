@@ -9,8 +9,14 @@ class DevelopersController extends GetxController {
   // Loading state
   RxBool isLoading = true.obs;
 
-  // List to hold developer data
+  // List to hold all developers
   RxList<UserDetails> developersList = <UserDetails>[].obs;
+
+  // Filtered list for search results
+  RxList<UserDetails> filteredDevelopers = <UserDetails>[].obs;
+
+  // Search query text
+  RxString searchQuery = ''.obs;
 
   @override
   void onInit() {
@@ -18,9 +24,12 @@ class DevelopersController extends GetxController {
     super.onInit();
   }
 
-  // Fun for fetching developers
+  // Fetch all developers with a delay
   void fetchDevelopers() async {
     isLoading.value = true;
+
+    await Future.delayed(const Duration(seconds: 2));
+
     final result = await userService.getDevelopers();
     result.fold(
       (failure) {
@@ -28,8 +37,27 @@ class DevelopersController extends GetxController {
       },
       (success) {
         developersList.assignAll(success);
+        filteredDevelopers.assignAll(success);
         isLoading.value = false;
       },
     );
+  }
+
+  // Search developers by name
+  void searchDevelopers(String query) {
+    searchQuery.value = query;
+
+    if (query.isEmpty) {
+      filteredDevelopers.assignAll(developersList);
+    } else {
+      final results = developersList.where((dev) {
+        final name = dev.name?.toLowerCase() ?? '';
+        final login = dev.login?.toLowerCase() ?? '';
+        final lowerQuery = query.toLowerCase();
+        return name.contains(lowerQuery) || login.contains(lowerQuery);
+      }).toList();
+
+      filteredDevelopers.assignAll(results);
+    }
   }
 }

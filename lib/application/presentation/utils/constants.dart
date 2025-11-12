@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 const appLogo = 'assets/images/app_logo.png';
 const noInternetConnection = 'assets/images/no_internet_connection_img.png';
 
+const jsonPath = 'assets/mock/developers.json';
+
 ///  Error Message
 const errorMessage = 'Something went wrong. Please try again.';
 
