@@ -8,28 +8,39 @@ import 'package:devhub/domain/repository/user_repo.dart';
 
 class UserService implements UserRepo {
   final ApiService apiService = ApiService();
-
   @override
   Future<Either<Failure, List<UserDetails>>> getDevelopers() async {
     try {
+      /// Get the base user list
       final result = await apiService.get(ApiEndPoints.users);
-
       final developers = (result as List<dynamic>)
           .map((e) => UserDetails.fromJson(e))
           .toList();
 
-      log(
-        'Mapped ${developers.length} developer objects successfully.',
-        name: '[UserService]',
-      );
+      /// Fetch details for each developer using login
+      final List<UserDetails> fullDevelopers = [];
+      for (final dev in developers) {
+        if (dev.login != null && dev.login!.isNotEmpty) {
+          try {
+            final details = await apiService.get(
+              '${ApiEndPoints.users}/${dev.login}',
+            );
+            final fullUser = UserDetails.fromJson(details);
+            fullDevelopers.add(fullUser);
+          } catch (e) {
+            log('[UserService] Failed to load details for ${dev.login}: $e');
 
-      return Right(developers);
-    } catch (e, st) {
+            fullDevelopers.add(dev);
+          }
+        }
+      }
+
       log(
-        'Failed to fetch developers: $e',
-        stackTrace: st,
-        name: '[UserService]',
+        '[UserService] Completed fetching full details for ${fullDevelopers.length} developers',
       );
+      return Right(fullDevelopers);
+    } catch (e, st) {
+      log('[UserService] Error fetching developers: $e', stackTrace: st);
       return Left(Failure(message: e.toString()));
     }
   }

@@ -38,6 +38,25 @@ class UserDetails {
   String? userViewType;
   @JsonKey(name: 'site_admin')
   bool? siteAdmin;
+  String? name;
+  String? company;
+  String? blog;
+  String? location;
+  dynamic email;
+  dynamic hireable;
+  dynamic bio;
+  @JsonKey(name: 'twitter_username')
+  String? twitterUsername;
+  @JsonKey(name: 'public_repos')
+  int? publicRepos;
+  @JsonKey(name: 'public_gists')
+  int? publicGists;
+  int? followers;
+  int? following;
+  @JsonKey(name: 'created_at')
+  String? createdAt;
+  @JsonKey(name: 'updated_at')
+  String? updatedAt;
 
   UserDetails({
     this.login,
@@ -59,6 +78,20 @@ class UserDetails {
     this.type,
     this.userViewType,
     this.siteAdmin,
+    this.name,
+    this.company,
+    this.blog,
+    this.location,
+    this.email,
+    this.hireable,
+    this.bio,
+    this.twitterUsername,
+    this.publicRepos,
+    this.publicGists,
+    this.followers,
+    this.following,
+    this.createdAt,
+    this.updatedAt,
   });
 
   factory UserDetails.fromJson(Map<String, dynamic> json) {

@@ -20,7 +20,9 @@ class RouteGenerator {
     GetPage(
       name: Routes.developerDetail,
       page: () {
-        return ScreenDeveloperDetail(name: '', username: '', avatarUrl: '');
+        final args = Get.arguments;
+
+        return ScreenDeveloperDetail(userDetails: args);
       },
       transition: Transition.cupertino,
       transitionDuration: animationDuration,

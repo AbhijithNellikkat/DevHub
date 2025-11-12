@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 ///  App Colors
 
-const Color kprimary = Color.fromARGB(255, 80, 60, 171); // App primary color
+const Color kprimary = Colors.brown; // App primary color
 const Color kblack = Colors.black;
 const Color kwhite = Colors.white;
 const Color koffwhite = Color(0xFFF7F7F7);
