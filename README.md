@@ -5,7 +5,7 @@ The app fetches a list of developers, allows users to favorite developers, toggl
 
 
 📁 Project Structure
-
+⚙️ Features<img width="699" height="357" alt="Screenshot 2025-11-12 at 4 04 49 PM" src="https://github.com/user-attachments/assets/4233bbb9-a17c-4c53-9e2d-ac2687bd5885" />
 
 
 
@@ -20,7 +20,7 @@ Application =>	Connects data & domain layers; manages controllers (GetX)
 Presentation => 	UI layer that observes GetX states
 
 
-⚙️ Features<img width="699" height="357" alt="Screenshot 2025-11-12 at 4 04 49 PM" src="https://github.com/user-attachments/assets/4233bbb9-a17c-4c53-9e2d-ac2687bd5885" />
+
 
 
 🔄 Pull-to-refresh for developer list
