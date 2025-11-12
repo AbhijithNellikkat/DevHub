@@ -1,40 +1,16 @@
 import 'package:devhub/application/presentation/utils/colors.dart';
+import 'package:devhub/domain/models/user_details/user_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class ScreenDeveloperDetail extends StatelessWidget {
-  final String name;
-  final String username;
-  final String avatarUrl;
+  final UserDetails userDetails;
 
-  const ScreenDeveloperDetail({
-    super.key,
-    required this.name,
-    required this.username,
-    required this.avatarUrl,
-  });
+  const ScreenDeveloperDetail({super.key, required this.userDetails});
 
   @override
   Widget build(BuildContext context) {
-    final repositories = [
-      {
-        'name': 'flutter-awesome-app',
-        'description': 'An awesome Flutter project using clean architecture.',
-        'stars': 120,
-      },
-      {
-        'name': 'devhub-api',
-        'description': 'A backend for developer listing built with Node.js.',
-        'stars': 89,
-      },
-      {
-        'name': 'portfolio-site',
-        'description': 'Personal portfolio website built with React.',
-        'stars': 56,
-      },
-    ];
-
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -67,18 +43,18 @@ class ScreenDeveloperDetail extends StatelessWidget {
               SizedBox(height: 20.h),
               CircleAvatar(
                 radius: 50.r,
-                backgroundImage: NetworkImage(avatarUrl),
+                backgroundImage: NetworkImage(userDetails.avatarUrl ?? ""),
               ),
               SizedBox(height: 16.h),
               Text(
-                name,
+                userDetails.name ?? '',
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                   fontSize: 22.sp,
                 ),
               ),
               Text(
-                '@$username',
+                '@${userDetails.login ?? ''}',
                 style: TextStyle(color: Colors.grey[600], fontSize: 14.sp),
               ),
               SizedBox(height: 12.h),
@@ -112,56 +88,56 @@ class ScreenDeveloperDetail extends StatelessWidget {
               ),
               SizedBox(height: 12.h),
 
-              ListView.separated(
-                itemCount: repositories.length,
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                separatorBuilder: (_, __) => SizedBox(height: 12.h),
-                itemBuilder: (context, index) {
-                  final repo = repositories[index];
-                  return Container(
-                    padding: EdgeInsets.all(12.w),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      borderRadius: BorderRadius.circular(12.r),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          repo['name'] as String,
-                          style: Theme.of(context).textTheme.titleMedium
-                              ?.copyWith(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16.sp,
-                              ),
-                        ),
-                        SizedBox(height: 6.h),
-                        Text(
-                          repo['description'] as String,
-                          style: Theme.of(context).textTheme.bodyMedium
-                              ?.copyWith(
-                                color: Colors.grey[700],
-                                fontSize: 13.sp,
-                              ),
-                        ),
-                        SizedBox(height: 8.h),
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.star,
-                              size: 18,
-                              color: Colors.amber,
-                            ),
-                            SizedBox(width: 4.w),
-                            Text('${repo['stars']}'),
-                          ],
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
+              // ListView.separated(
+              //   itemCount: repositories.length,
+              //   physics: const NeverScrollableScrollPhysics(),
+              //   shrinkWrap: true,
+              //   separatorBuilder: (_, __) => SizedBox(height: 12.h),
+              //   itemBuilder: (context, index) {
+              //     final repo = repositories[index];
+              //     return Container(
+              //       padding: EdgeInsets.all(12.w),
+              //       decoration: BoxDecoration(
+              //         color: Colors.grey[100],
+              //         borderRadius: BorderRadius.circular(12.r),
+              //       ),
+              //       child: Column(
+              //         crossAxisAlignment: CrossAxisAlignment.start,
+              //         children: [
+              //           Text(
+              //             repo['name'] as String,
+              //             style: Theme.of(context).textTheme.titleMedium
+              //                 ?.copyWith(
+              //                   fontWeight: FontWeight.w600,
+              //                   fontSize: 16.sp,
+              //                 ),
+              //           ),
+              //           SizedBox(height: 6.h),
+              //           Text(
+              //             repo['description'] as String,
+              //             style: Theme.of(context).textTheme.bodyMedium
+              //                 ?.copyWith(
+              //                   color: Colors.grey[700],
+              //                   fontSize: 13.sp,
+              //                 ),
+              //           ),
+              //           SizedBox(height: 8.h),
+              //           Row(
+              //             children: [
+              //               const Icon(
+              //                 Icons.star,
+              //                 size: 18,
+              //                 color: Colors.amber,
+              //               ),
+              //               SizedBox(width: 4.w),
+              //               Text('${repo['stars']}'),
+              //             ],
+              //           ),
+              //         ],
+              //       ),
+              //     );
+              //   },
+              // ),
             ],
           ),
         ),

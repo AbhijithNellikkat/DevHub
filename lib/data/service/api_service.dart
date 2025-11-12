@@ -10,7 +10,12 @@ class ApiService {
   ApiService() {
     _dio.options = BaseOptions(
       baseUrl: ApiEndPoints.baseUrl,
-      headers: {'content-Type': 'application/json'},
+      headers: {
+        'accept': 'application/vnd.github+json',
+        'content-Type': 'application/json',
+        'Authorization':
+            'toekn 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', // now its hardcoded for testing
+      },
     );
 
     assert(() {
